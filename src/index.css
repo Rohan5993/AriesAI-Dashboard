@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", sans-serif;
+  
+  --color-background: #0a0a0f;
+  --color-surface: #12121a;
+  --color-primary: #7b61ff;
+  --color-secondary: #9d88ff;
+  --color-accent: #b8a8ff;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-text-main: #f4f4f5;
+  --color-text-muted: #a1a1aa;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text-main font-sans antialiased selection:bg-primary/30;
+    background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, #0a0a0f 70%);
+    background-attachment: fixed;
+  }
+  
+  button {
+    font-size: 0.9rem;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
+  }
+  
+  .glass-panel {
+    @apply bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] rounded-2xl relative overflow-hidden transition-all duration-300;
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+  }
+
+  .glass-panel:hover {
+    @apply border-white/[0.1] bg-white/[0.03];
+    box-shadow: 0 8px 32px -1px rgba(123, 97, 255, 0.1);
+  }
+  
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(123, 97, 255, 0.3), 0 0 40px rgba(157, 136, 255, 0.1);
+  }
+
+  .noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(123, 97, 255, 0.4);
+    transform: translateY(-2px) scale(1.01);
+  }
+
+  .grid-viewport {
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
