@@ -280,44 +280,44 @@ export default function CalendarView() {
   };
 
   return (
-    <div className="h-full bg-[#050505] text-white p-8 font-sans relative overflow-hidden flex flex-col grid-viewport">
+    <div className="h-full bg-[#050505] text-white p-4 md:p-8 font-sans relative overflow-hidden flex flex-col grid-viewport">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 relative z-10 shrink-0">
-        <div className="flex items-center gap-6">
-          <h1 className="text-4xl font-medium tracking-tight min-w-[240px]">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
+          <h1 className="text-xl md:text-3xl font-medium tracking-tight min-w-[150px] md:min-w-[240px]">
             {format(currentDate, 'MMMM yyyy')}
           </h1>
           <div className="flex items-center gap-2">
-            <button onClick={prev} className="p-2 hover:bg-white/5 rounded-lg border border-white/10 transition-colors">
-              <ChevronLeft className="w-5 h-5" />
+            <button onClick={prev} className="p-1.5 md:p-2 hover:bg-white/5 rounded-lg border border-white/10 transition-colors">
+              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
             </button>
-            <button onClick={goToToday} className="px-6 py-2 hover:bg-white/5 rounded-lg border border-white/10 transition-colors font-medium">
+            <button onClick={goToToday} className="px-3 md:px-6 py-1.5 md:py-2 hover:bg-white/5 rounded-lg border border-white/10 transition-colors font-medium text-xs md:text-base">
               Today
             </button>
-            <button onClick={next} className="p-2 hover:bg-white/5 rounded-lg border border-white/10 transition-colors">
-              <ChevronRight className="w-5 h-5" />
+            <button onClick={next} className="p-1.5 md:p-2 hover:bg-white/5 rounded-lg border border-white/10 transition-colors">
+              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
             </button>
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-4">
           <div className="flex bg-[#111] p-1 rounded-xl border border-white/5">
             <button 
               onClick={() => setView('week')}
-              className={`px-6 py-2 rounded-lg text-sm font-medium transition-all ${view === 'week' ? 'bg-[#222] text-white shadow-lg' : 'text-zinc-500 hover:text-zinc-300'}`}
+              className={`flex-1 sm:flex-none px-3 md:px-6 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${view === 'week' ? 'bg-[#222] text-white shadow-lg' : 'text-zinc-500 hover:text-zinc-300'}`}
             >
               Week
             </button>
             <button 
               onClick={() => setView('month')}
-              className={`px-6 py-2 rounded-lg text-sm font-medium transition-all ${view === 'month' ? 'bg-[#222] text-white shadow-lg' : 'text-zinc-500 hover:text-zinc-300'}`}
+              className={`flex-1 sm:flex-none px-3 md:px-6 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${view === 'month' ? 'bg-[#222] text-white shadow-lg' : 'text-zinc-500 hover:text-zinc-300'}`}
             >
               Month
             </button>
           </div>
           <button 
             onClick={() => handleCreatePost()}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-2.5 rounded-xl font-medium transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)] flex items-center gap-2"
+            className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 md:px-8 py-2 md:py-2.5 rounded-xl font-medium transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)] flex items-center justify-center gap-2 text-sm md:text-base"
           >
             <Plus className="w-4 h-4" />
             New Post
@@ -326,21 +326,22 @@ export default function CalendarView() {
       </div>
 
       {/* Calendar Grid */}
-      <div className="relative z-10 flex-1 flex flex-col min-h-0">
-        {/* Days of Week Header */}
-        <div className="grid grid-cols-7 mb-6 shrink-0">
-          {(view === 'month' 
-            ? ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'] 
-            : ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
-          ).map(day => (
-            <div key={day} className="text-center text-[10px] font-bold text-zinc-600 tracking-[0.3em]">
-              {day}
-            </div>
-          ))}
-        </div>
+      <div className="relative z-10 flex-1 flex flex-col min-h-0 overflow-x-auto no-scrollbar -mx-4 px-4 lg:mx-0 lg:px-0">
+        <div className="min-w-[900px] lg:min-w-0 flex-1 flex flex-col">
+          {/* Days of Week Header */}
+          <div className="grid grid-cols-7 mb-6 shrink-0">
+            {(view === 'month' 
+              ? ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'] 
+              : ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+            ).map(day => (
+              <div key={day} className="text-center text-[8px] md:text-[10px] font-bold text-zinc-600 tracking-[0.2em] md:tracking-[0.3em]">
+                {day}
+              </div>
+            ))}
+          </div>
 
-        {/* Dates Grid */}
-        <div className={`grid grid-cols-7 flex-1 min-h-0 ${view === 'month' ? 'gap-px bg-white/[0.05] border border-white/[0.05] grid-rows-5' : 'gap-4 grid-rows-1'}`}>
+          {/* Dates Grid */}
+          <div className={`grid grid-cols-7 flex-1 min-h-0 ${view === 'month' ? 'gap-px bg-white/[0.05] border border-white/[0.05] grid-rows-5' : 'gap-2 md:gap-4 grid-rows-1'}`}>
           {calendarDays.map((day, idx) => {
             const dayPosts = posts.filter(p => isSameDay(p.scheduledAt, day));
             const active = isToday(day);
@@ -392,42 +393,42 @@ export default function CalendarView() {
 
             // Weekly View (Detailed)
             return (
-              <div key={idx} className={`flex flex-col items-center p-2 rounded-2xl border border-white/[0.03] bg-white/[0.01] overflow-hidden`}>
+              <div key={idx} className={`flex flex-col items-center p-1 md:p-2 rounded-2xl border border-white/[0.03] bg-white/[0.01] overflow-hidden`}>
                 {/* Date Circle */}
-                <div className="mb-4 relative shrink-0">
+                <div className="mb-2 md:mb-4 relative shrink-0">
                   {active && (
                     <motion.div 
                       layoutId="active-glow"
                       className="absolute inset-0 bg-indigo-600 blur-lg opacity-40 rounded-full scale-125"
                     />
                   )}
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium relative z-10 transition-all ${active ? 'bg-indigo-600 text-white shadow-[0_0_10px_rgba(79,70,229,0.5)]' : 'text-zinc-500'}`}>
+                  <div className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs md:text-sm font-medium relative z-10 transition-all ${active ? 'bg-indigo-600 text-white shadow-[0_0_10px_rgba(79,70,229,0.5)]' : 'text-zinc-50'}`}>
                     {format(day, 'd')}
                   </div>
                 </div>
 
                 {/* Posts for this day */}
-                <div className="w-full space-y-4 overflow-y-auto custom-scrollbar flex-1 pr-1 py-4 mt-2">
+                <div className="w-full space-y-2 md:space-y-4 overflow-y-auto custom-scrollbar flex-1 pr-0.5 md:pr-1 py-2 md:py-4 mt-1 md:mt-2">
                   {dayPosts.sort((a, b) => a.scheduledAt.getTime() - b.scheduledAt.getTime()).map(post => (
                     <div 
                       key={post.id}
                       onClick={() => handlePostClick(post)}
-                      className={`p-4 rounded-2xl border bg-[#0a0a0a]/80 backdrop-blur-sm transition-all hover:scale-[1.02] cursor-pointer min-h-[120px] flex flex-col justify-between shadow-lg ${PLATFORM_COLORS[post.platform]}`}
+                      className={`p-2 md:p-4 rounded-xl md:rounded-2xl border bg-[#0a0a0a]/80 backdrop-blur-sm transition-all hover:scale-[1.02] cursor-pointer min-h-[100px] md:min-h-[120px] flex flex-col justify-between shadow-lg ${PLATFORM_COLORS[post.platform]}`}
                     >
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[10px] font-mono opacity-70">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[8px] md:text-[10px] font-mono opacity-70">
                           {format(post.scheduledAt, 'HH:mm')}
                         </span>
-                        <span className={`text-[7px] px-2 py-0.5 rounded-full border font-bold tracking-wider uppercase ${STATUS_COLORS[post.status]}`}>
-                          {post.status === 'PUBLISHED' ? 'Published' : 'Scheduled'}
+                        <span className={`text-[6px] md:text-[7px] px-1.5 md:px-2 py-0.5 rounded-full border font-bold tracking-wider uppercase whitespace-nowrap ${STATUS_COLORS[post.status]}`}>
+                          {post.status === 'PUBLISHED' ? 'Pub' : 'Sch'}
                         </span>
                       </div>
-                      <h3 className="text-[11px] font-bold text-white mb-1.5 line-clamp-2 leading-tight">
+                      <h3 className="text-[9px] md:text-[11px] font-bold text-white mb-1 md:mb-1.5 line-clamp-2 leading-tight">
                         {post.title}
                       </h3>
-                      <div className="flex items-center gap-1.5 opacity-60">
-                        <PlatformIcon platform={post.platform} className="w-2.5 h-2.5" />
-                        <span className="text-[8px] font-bold uppercase tracking-widest">{post.platform}</span>
+                      <div className="flex items-center gap-1 md:gap-1.5 opacity-60">
+                        <PlatformIcon platform={post.platform} className="w-2 md:w-2.5 h-2 md:h-2.5" />
+                        <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-widest truncate">{post.platform}</span>
                       </div>
                     </div>
                   ))}
@@ -443,6 +444,7 @@ export default function CalendarView() {
               </div>
             );
           })}
+          </div>
         </div>
       </div>
 
@@ -450,7 +452,7 @@ export default function CalendarView() {
       <AnimatePresence>
         {/* Create Post Modal */}
         {activeModal === 'create' && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center md:p-4">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -462,9 +464,9 @@ export default function CalendarView() {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative w-full max-w-lg bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+              className="relative w-full h-full md:h-auto md:max-w-lg bg-[#0a0a0a] border-0 md:border md:border-white/10 rounded-none md:rounded-3xl overflow-hidden shadow-2xl"
             >
-              <div className="p-8">
+              <div className="p-6 md:p-8">
                 <div className="flex items-center justify-between mb-8">
                   <h2 className="text-2xl font-medium text-white">Create New Post</h2>
                   <button onClick={() => setActiveModal(null)} className="p-2 hover:bg-white/5 rounded-full transition-colors">
@@ -548,7 +550,7 @@ export default function CalendarView() {
 
         {/* Generation / Preview Modal */}
         {activeModal === 'generate' && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center md:p-4">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -563,11 +565,11 @@ export default function CalendarView() {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative w-full max-w-5xl bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col h-[85vh] mt-10"
+              className="relative w-full h-full md:h-[90vh] md:max-w-6xl bg-[#0a0a0a] border-0 md:border md:border-white/10 rounded-none md:rounded-3xl overflow-hidden shadow-2xl flex flex-col"
             >
-              <div className="p-6 border-b border-white/5 flex items-center justify-between">
-                <div className="flex items-center gap-6">
-                  <h2 className="text-xl font-medium truncate max-w-[300px]">
+              <div className="p-4 md:p-6 border-b border-white/5 flex items-center justify-between">
+                <div className="flex items-center gap-4 md:gap-6">
+                  <h2 className="text-lg md:text-xl font-medium truncate max-w-[150px] md:max-w-[300px]">
                     {generatingPost.title 
                       ? (generatingPost.title.split(' ').slice(0, 6).join(' ') + (generatingPost.title.split(' ').length > 6 ? '...' : ''))
                       : 'Post Configuration'}
@@ -587,8 +589,8 @@ export default function CalendarView() {
                     </button>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2 bg-[#111] px-3 py-1.5 rounded-lg border border-white/5">
+                <div className="flex items-center gap-2 md:gap-4">
+                  <div className="hidden sm:flex items-center gap-2 bg-[#111] px-3 py-1.5 rounded-lg border border-white/5">
                     <CalendarIcon className="w-3.5 h-3.5 text-zinc-500" />
                     <input 
                       type="date" 
@@ -614,72 +616,94 @@ export default function CalendarView() {
                 </div>
               </div>
 
-              <div className="flex-1 overflow-hidden flex">
+              <div className="flex-1 overflow-hidden flex flex-col lg:flex-row">
                 {/* Left Sidebar: Platform Multi-select */}
-                <div className="w-64 border-r border-white/5 bg-[#0a0a0a] p-6 flex flex-col gap-6">
-                  <div>
-                    <h3 className="text-xs font-bold text-zinc-500 tracking-widest uppercase mb-4">Select Platforms</h3>
-                    <div className="space-y-2">
-                      {PLATFORMS.map(p => {
-                        const isSelected = generatingPost.platforms?.includes(p);
-                        return (
-                          <button
-                            key={p}
-                            onClick={() => {
-                              const current = generatingPost.platforms || [];
-                              const next = isSelected 
-                                ? current.filter(item => item !== p)
-                                : [...current, p];
-                              setGeneratingPost(prev => ({ ...prev, platforms: next }));
-                            }}
-                            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl border transition-all ${isSelected ? 'bg-indigo-600/10 border-indigo-500 text-white' : 'bg-[#111] border-white/5 text-zinc-500 hover:border-white/20'}`}
-                          >
-                            <div className="flex items-center gap-3">
-                              <PlatformIcon platform={p} className="w-4 h-4" />
-                              <span className="text-xs font-medium">{p}</span>
-                            </div>
-                            {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(79,70,229,0.8)]" />}
-                          </button>
-                        );
-                      })}
+                <div className="w-full lg:w-64 border-b lg:border-b-0 lg:border-r border-white/5 bg-[#0a0a0a] p-4 md:p-6 flex flex-col gap-4 md:gap-6 overflow-x-auto lg:overflow-y-auto no-scrollbar">
+                  <div className="flex lg:flex-col gap-4 lg:gap-6 min-w-max lg:min-w-0">
+                    <div className="shrink-0 lg:shrink">
+                      <h3 className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase mb-3 lg:mb-4">Platforms</h3>
+                      <div className="flex lg:flex-col gap-2">
+                        {PLATFORMS.map(p => {
+                          const isSelected = generatingPost.platforms?.includes(p);
+                          return (
+                            <button
+                              key={p}
+                              onClick={() => {
+                                const current = generatingPost.platforms || [];
+                                const next = isSelected 
+                                  ? current.filter(item => item !== p)
+                                  : [...current, p];
+                                setGeneratingPost(prev => ({ ...prev, platforms: next }));
+                              }}
+                              className={`flex items-center justify-between px-3 py-2 lg:px-4 lg:py-3 rounded-xl border transition-all ${isSelected ? 'bg-indigo-600/10 border-indigo-500 text-white' : 'bg-[#111] border-white/5 text-zinc-500 hover:border-white/20'}`}
+                            >
+                              <div className="flex items-center gap-2 lg:gap-3">
+                                <PlatformIcon platform={p} className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
+                                <span className="text-[10px] lg:text-xs font-medium">{p}</span>
+                              </div>
+                              {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(79,70,229,0.8)]" />}
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
 
-                  <div>
-                    <h3 className="text-xs font-bold text-zinc-500 tracking-widest uppercase mb-4">Media</h3>
-                    <input 
-                      type="file" 
-                      id="post-image-upload" 
-                      className="hidden" 
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) {
-                          const reader = new FileReader();
-                          reader.onloadend = () => {
-                            setUploadedImage(reader.result as string);
-                          };
-                          reader.readAsDataURL(file);
-                        }
-                      }}
-                    />
-                    <label 
-                      htmlFor="post-image-upload"
-                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-white/5 bg-[#111] text-zinc-500 hover:border-white/20 hover:text-white transition-all cursor-pointer"
-                    >
-                      <ImageIcon className="w-4 h-4" />
-                      <span className="text-xs font-medium">Upload Image</span>
-                    </label>
-                  </div>
-
-                  <div className="mt-auto">
+                    <div className="shrink-0 lg:shrink">
+                      <h3 className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase mb-3 lg:mb-4">Media</h3>
+                      <input 
+                        type="file" 
+                        id="post-image-upload" 
+                        className="hidden" 
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              setUploadedImage(reader.result as string);
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                      <label 
+                        htmlFor="post-image-upload"
+                        className="flex items-center gap-2 lg:gap-3 px-3 py-2 lg:px-4 lg:py-3 rounded-xl border border-white/5 bg-[#111] text-zinc-500 hover:border-white/20 hover:text-white transition-all cursor-pointer"
+                      >
+                        <ImageIcon className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
+                        <span className="text-[10px] lg:text-xs font-medium">Upload Image</span>
+                      </label>
+                    </div>
                   </div>
                 </div>
 
                 {/* Preview Area */}
-                <div className="flex-1 bg-[#050505] p-12 pt-20 overflow-y-auto flex flex-col items-center gap-8">
+                <div className="flex-1 bg-[#050505] p-4 md:p-8 lg:p-12 lg:pt-20 overflow-y-auto flex flex-col items-center gap-6 md:gap-8">
+                  <div className="sm:hidden w-full space-y-4 mb-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Date</label>
+                        <input 
+                          type="date" 
+                          value={newPostDate}
+                          onChange={(e) => setNewPostDate(e.target.value)}
+                          className="w-full bg-[#111] border border-white/5 rounded-lg px-3 py-2 text-xs text-white focus:outline-none [color-scheme:dark]"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Time</label>
+                        <input 
+                          type="time" 
+                          value={newPostTime}
+                          onChange={(e) => setNewPostTime(e.target.value)}
+                          className="w-full bg-[#111] border border-white/5 rounded-lg px-3 py-2 text-xs text-white focus:outline-none [color-scheme:dark]"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
                   {(generatingPost.platforms?.length ? generatingPost.platforms : [generatingPost.platform]).map((plat, pIdx) => (
-                    <div key={plat || pIdx} className={`transition-all duration-500 ${previewMode === 'mobile' ? 'w-[320px]' : 'w-full max-w-2xl'}`}>
+                    <div key={plat || pIdx} className={`transition-all duration-500 ${previewMode === 'mobile' ? 'w-full max-w-[320px]' : 'w-full max-w-2xl'}`}>
                       <div className="bg-[#111] rounded-2xl border border-white/5 overflow-hidden shadow-xl">
                         <div className="p-4 border-b border-white/5 flex items-center justify-between">
                           <div className="flex items-center gap-3">
@@ -697,7 +721,7 @@ export default function CalendarView() {
                           <textarea 
                             value={generatingPost.content}
                             onChange={(e) => setGeneratingPost(prev => ({ ...prev, content: e.target.value }))}
-                            className="w-full bg-transparent text-sm leading-relaxed focus:outline-none resize-none min-h-[200px]"
+                            className="w-full bg-transparent text-sm leading-relaxed focus:outline-none resize-none min-h-[150px] md:min-h-[200px]"
                             placeholder={`Write your ${plat} content here...`}
                           />
                         </div>
@@ -721,9 +745,9 @@ export default function CalendarView() {
                 </div>
 
                 {/* Feedback Area */}
-                <div className="w-96 border-l border-white/5 bg-[#0a0a0a] p-8 flex flex-col">
-                  <h3 className="text-xs font-bold text-zinc-500 tracking-widest uppercase mb-6">AI Assistant</h3>
-                  <div className="flex-1 overflow-y-auto space-y-6 mb-6">
+                <div className="w-full lg:w-96 border-t lg:border-t-0 lg:border-l border-white/5 bg-[#0a0a0a] p-6 md:p-8 flex flex-col">
+                  <h3 className="text-xs font-bold text-zinc-500 tracking-widest uppercase mb-4 md:mb-6">AI Assistant</h3>
+                  <div className="flex-1 overflow-y-auto space-y-4 md:space-y-6 mb-4 md:mb-6 max-h-[200px] lg:max-h-none">
                     <div className="bg-[#111] rounded-2xl p-4 text-sm text-zinc-400 leading-relaxed border border-white/5">
                       I've crafted this post for your {generatingPost.platform} audience. It focuses on the key themes from your description.
                       <br /><br />
@@ -741,8 +765,8 @@ export default function CalendarView() {
                       <textarea 
                         value={aiFeedback}
                         onChange={(e) => setAiFeedback(e.target.value)}
-                        placeholder="Ask AI to refine (e.g., 'make it more punchy')"
-                        className="w-full bg-[#111] border border-white/5 rounded-2xl p-4 text-sm text-white focus:outline-none focus:border-indigo-500/50 transition-colors h-32 resize-none pr-12"
+                        placeholder="Ask AI to refine..."
+                        className="w-full bg-[#111] border border-white/5 rounded-2xl p-4 text-sm text-white focus:outline-none focus:border-indigo-500/50 transition-colors h-24 md:h-32 resize-none pr-12"
                       />
                       <button 
                         onClick={handleAiFeedback}
@@ -756,16 +780,16 @@ export default function CalendarView() {
                 </div>
               </div>
 
-              <div className="p-8 border-t border-white/5 bg-[#0a0a0a] flex justify-end gap-4">
+              <div className="p-4 md:p-8 border-t border-white/5 bg-[#0a0a0a] flex flex-col sm:flex-row justify-end gap-3 md:gap-4">
                 <button 
                   onClick={() => finalizePost('SCHEDULED')}
-                  className="px-8 py-3 rounded-xl border border-white/10 text-white font-medium hover:bg-white/5 transition-colors"
+                  className="w-full sm:w-auto px-8 py-3 rounded-xl border border-white/10 text-white font-medium hover:bg-white/5 transition-colors"
                 >
                   Schedule
                 </button>
                 <button 
                   onClick={() => finalizePost('PUBLISHED')}
-                  className="px-8 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)]"
+                  className="w-full sm:w-auto px-8 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)]"
                 >
                   Publish Now
                 </button>
@@ -776,7 +800,7 @@ export default function CalendarView() {
 
         {/* Post Preview Modal */}
         {activeModal === 'preview' && selectedPost && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center md:p-4">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -788,9 +812,9 @@ export default function CalendarView() {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative w-full max-w-lg bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+              className="relative w-full h-full md:h-auto md:max-w-lg bg-[#0a0a0a] border-0 md:border md:border-white/10 rounded-none md:rounded-3xl overflow-hidden shadow-2xl"
             >
-              <div className="p-8">
+              <div className="p-6 md:p-8">
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-3">
                     <PlatformIcon platform={selectedPost.platform} className="w-5 h-5" />

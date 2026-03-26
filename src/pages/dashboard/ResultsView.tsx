@@ -192,20 +192,20 @@ export default function ResultsView() {
         </div>
 
         {/* KPI Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {kpis.map((kpi, i) => (
             <motion.div
               key={kpi.label}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="glass-panel p-6 flex flex-col justify-between group hover:border-primary/30"
+              className="glass-panel p-4 md:p-6 flex flex-col justify-between group hover:border-primary/30"
             >
               <div className="flex justify-between items-start mb-4">
-                <div className="p-2.5 rounded-xl bg-white/5 text-text-muted group-hover:text-primary transition-colors">
-                  <kpi.icon className="w-5 h-5" />
+                <div className="p-2 rounded-xl bg-white/5 text-text-muted group-hover:text-primary transition-colors">
+                  <kpi.icon className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
-                <div className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-md ${
+                <div className={`flex items-center gap-1 text-[10px] md:text-xs font-medium px-2 py-1 rounded-md ${
                   kpi.trend === 'up' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'
                 }`}>
                   {kpi.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
@@ -213,8 +213,8 @@ export default function ResultsView() {
                 </div>
               </div>
               <div>
-                <h3 className="text-3xl font-display font-semibold text-white mb-1">{kpi.value}</h3>
-                <p className="text-sm text-text-muted">{kpi.label}</p>
+                <h3 className="text-2xl md:text-3xl font-display font-semibold text-white mb-1">{kpi.value}</h3>
+                <p className="text-xs md:text-sm text-text-muted">{kpi.label}</p>
               </div>
             </motion.div>
           ))}
@@ -225,18 +225,18 @@ export default function ResultsView() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="glass-panel p-8"
+          className="glass-panel p-4 md:p-8"
         >
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 md:mb-8">
             <div>
-              <h2 className="text-lg font-semibold text-white">Engagement Over Time</h2>
-              <p className="text-xs text-text-muted">Daily breakdown of interactions and reach.</p>
+              <h2 className="text-base md:text-lg font-semibold text-white">Engagement Over Time</h2>
+              <p className="text-[10px] md:text-xs text-text-muted">Daily breakdown of interactions and reach.</p>
             </div>
             {selectedPlatform === 'all' && (
-              <div className="flex flex-wrap gap-4 text-[10px] font-bold tracking-widest uppercase">
+              <div className="flex flex-wrap gap-3 md:gap-4 text-[9px] md:text-[10px] font-bold tracking-widest uppercase">
                 {PLATFORMS.filter(p => p.id !== 'all').map(p => (
                   <div key={p.id} className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: p.color }}></div>
+                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full" style={{ backgroundColor: p.color }}></div>
                     <span className="text-text-muted">{p.name}</span>
                   </div>
                 ))}
@@ -244,7 +244,7 @@ export default function ResultsView() {
             )}
           </div>
           
-          <div className="h-[350px] w-full">
+          <div className="h-[250px] md:h-[350px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={chartData as any[]} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
@@ -305,7 +305,11 @@ export default function ResultsView() {
                 <div key={stat.id} className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] transition-all group">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${stat.color}20` }}>
-                      {PLATFORMS.find(p => p.id === stat.id)?.icon && React.createElement(PLATFORMS.find(p => p.id === stat.id)!.icon, { className: "w-4 h-4", style: { color: stat.color } })}
+                      {PLATFORMS.find(p => p.id === stat.id)?.icon && (
+                        <div style={{ color: stat.color }}>
+                          {React.createElement(PLATFORMS.find(p => p.id === stat.id)!.icon, { className: "w-4 h-4" })}
+                        </div>
+                      )}
                     </div>
                     <div>
                       <p className="text-sm font-medium text-white">{stat.name}</p>

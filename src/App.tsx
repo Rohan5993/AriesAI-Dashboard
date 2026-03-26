@@ -7,6 +7,7 @@ import DashboardOverview from './pages/dashboard/DashboardOverview';
 import CalendarView from './pages/dashboard/CalendarView';
 import CampaignsView from './pages/dashboard/CampaignsView';
 import ResultsView from './pages/dashboard/ResultsView';
+import SettingsView from './pages/dashboard/SettingsView';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="calendar" element={<CalendarView />} />
           <Route path="campaigns" element={<CampaignsView />} />
           <Route path="results" element={<ResultsView />} />
+          <Route path="settings" element={<SettingsView />} />
         </Route>
         
         {/* Fallback */}

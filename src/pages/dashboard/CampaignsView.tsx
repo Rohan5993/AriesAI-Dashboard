@@ -52,16 +52,16 @@ export default function CampaignsView() {
   const [selectedCampaign, setSelectedCampaign] = useState<number | null>(null);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 md:gap-6">
         <div>
-          <h1 className="text-3xl font-display font-semibold tracking-tight text-white mb-2">Campaigns</h1>
-          <p className="text-text-muted">Manage your automated content flows.</p>
+          <h1 className="text-2xl md:text-3xl font-display font-semibold tracking-tight text-white mb-1 md:mb-2">Campaigns</h1>
+          <p className="text-xs md:text-sm text-text-muted">Manage your automated content flows.</p>
         </div>
-        <button className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 neon-glow">
+        <button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-4 md:px-6 py-2 md:py-2.5 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 neon-glow shadow-[0_0_20px_rgba(123,97,255,0.3)]">
           <Plus className="w-4 h-4" />
-          New Campaign
+          <span className="text-sm md:text-base">New Campaign</span>
         </button>
       </div>
 
@@ -147,26 +147,26 @@ export default function CampaignsView() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl max-h-[85vh] bg-surface border border-border rounded-2xl z-50 shadow-2xl flex flex-col overflow-hidden"
+              className="fixed inset-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-3xl h-full md:max-h-[85vh] bg-surface border-0 md:border md:border-border md:rounded-2xl z-50 shadow-2xl flex flex-col overflow-hidden"
             >
               {/* Modal Header */}
-              <div className="p-6 border-b border-border flex items-start justify-between bg-white/[0.02]">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center neon-glow">
-                    <Rocket className="w-6 h-6" />
+              <div className="p-4 md:p-6 border-b border-border flex items-start justify-between bg-white/[0.02]">
+                <div className="flex items-center gap-3 md:gap-4">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center neon-glow">
+                    <Rocket className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-display font-semibold text-white">Q4 Product Launch</h2>
-                    <div className="flex items-center gap-3 mt-1 text-sm text-text-muted">
+                    <h2 className="text-xl md:text-2xl font-display font-semibold text-white">Q4 Product Launch</h2>
+                    <div className="flex flex-wrap items-center gap-2 md:gap-3 mt-1 text-xs md:text-sm text-text-muted">
                       <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Active</span>
-                      <span>•</span>
+                      <span className="hidden sm:inline">•</span>
                       <span>12 Posts Total</span>
-                      <span>•</span>
+                      <span className="hidden sm:inline">•</span>
                       <span>Ends Nov 30</span>
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 md:gap-2">
                   <button className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-white transition-colors">
                     <Pause className="w-4 h-4" />
                   </button>
@@ -175,7 +175,7 @@ export default function CampaignsView() {
                   </button>
                   <button 
                     onClick={() => setSelectedCampaign(null)}
-                    className="p-2 hover:bg-white/5 rounded-lg text-text-muted hover:text-white transition-colors ml-2"
+                    className="p-2 hover:bg-white/5 rounded-lg text-text-muted hover:text-white transition-colors ml-1 md:ml-2"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -183,8 +183,8 @@ export default function CampaignsView() {
               </div>
 
               {/* Modal Content */}
-              <div className="flex-1 overflow-y-auto p-6">
-                <div className="grid grid-cols-3 gap-6 mb-8">
+              <div className="flex-1 overflow-y-auto p-4 md:p-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-8">
                   <div className="glass-panel p-4 flex flex-col items-center justify-center text-center">
                     <BarChart2 className="w-5 h-5 text-primary mb-2" />
                     <span className="text-2xl font-semibold text-white">45%</span>
@@ -203,14 +203,14 @@ export default function CampaignsView() {
                 </div>
 
                 <h3 className="text-lg font-semibold text-white mb-4">Timeline</h3>
-                <div className="space-y-4 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-border before:to-transparent">
+                <div className="space-y-4 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px lg:before:mx-auto lg:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-border before:to-transparent">
                   
                   {/* Timeline Item 1 */}
-                  <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-surface bg-emerald-500 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 neon-glow z-10">
+                  <div className="relative flex items-center justify-between lg:justify-normal lg:odd:flex-row-reverse group is-active">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-surface bg-emerald-500 text-white shadow shrink-0 lg:order-1 lg:group-odd:-translate-x-1/2 lg:group-even:translate-x-1/2 neon-glow z-10">
                       <CheckCircle2 className="w-5 h-5" />
                     </div>
-                    <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-4">
+                    <div className="w-[calc(100%-4rem)] lg:w-[calc(50%-2.5rem)] glass-panel p-4">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs font-medium text-emerald-400">Published</span>
                         <span className="text-xs text-text-muted">Oct 1, 10:00 AM</span>
@@ -221,11 +221,11 @@ export default function CampaignsView() {
                   </div>
 
                   {/* Timeline Item 2 */}
-                  <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-surface bg-primary text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 neon-glow z-10">
+                  <div className="relative flex items-center justify-between lg:justify-normal lg:odd:flex-row-reverse group">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-surface bg-primary text-white shadow shrink-0 lg:order-1 lg:group-odd:-translate-x-1/2 lg:group-even:translate-x-1/2 neon-glow z-10">
                       <Clock className="w-5 h-5" />
                     </div>
-                    <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-4 border-primary/30">
+                    <div className="w-[calc(100%-4rem)] lg:w-[calc(50%-2.5rem)] glass-panel p-4 border-primary/30">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs font-medium text-primary">Up Next</span>
                         <span className="text-xs text-text-muted">Today, 2:00 PM</span>
@@ -237,11 +237,11 @@ export default function CampaignsView() {
                   </div>
 
                   {/* Timeline Item 3 */}
-                  <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-surface bg-surface text-text-muted shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                  <div className="relative flex items-center justify-between lg:justify-normal lg:odd:flex-row-reverse group">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-surface bg-surface text-text-muted shadow shrink-0 lg:order-1 lg:group-odd:-translate-x-1/2 lg:group-even:translate-x-1/2 z-10">
                       <div className="w-2 h-2 rounded-full bg-text-muted"></div>
                     </div>
-                    <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-4 opacity-70">
+                    <div className="w-[calc(100%-4rem)] lg:w-[calc(50%-2.5rem)] glass-panel p-4 opacity-70">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs font-medium text-text-muted">Draft</span>
                         <span className="text-xs text-text-muted">Oct 10, 9:00 AM</span>

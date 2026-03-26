@@ -50,12 +50,12 @@ export default function DashboardOverview() {
     <div className="space-y-6 pb-12">
       
       {/* Top Section - Single Unified Box */}
-      <div className="relative w-full min-h-[550px] rounded-[2rem] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary/20 via-[#0a0a0f] to-[#0a0a0f] border border-white/10 overflow-hidden shadow-2xl">
+      <div className="relative w-full min-h-[400px] md:min-h-[550px] rounded-[1.5rem] md:rounded-[2rem] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary/20 via-[#0a0a0f] to-[#0a0a0f] border border-white/10 overflow-hidden shadow-2xl">
         
         {/* Company Name */}
-        <div className="absolute top-8 right-8 z-50">
-          <div className="bg-[#12121a] border border-white/10 rounded-2xl px-6 py-4 flex items-center justify-center shadow-xl">
-            <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">Northstar Studio</h2>
+        <div className="absolute top-6 right-6 md:top-8 md:right-8 z-50">
+          <div className="bg-[#12121a] border border-white/10 rounded-xl md:rounded-2xl px-3 py-1.5 md:px-6 md:py-4 flex items-center justify-center shadow-xl">
+            <h2 className="text-sm md:text-xl lg:text-2xl font-bold text-white tracking-tight whitespace-nowrap">Northstar Studio</h2>
           </div>
         </div>
 
@@ -63,21 +63,21 @@ export default function DashboardOverview() {
         <div className="absolute inset-0 flex items-end justify-center pointer-events-none">
           
           {/* Top Label (Total Reach) */}
-          <div className="absolute top-12 left-1/2 -translate-x-1/2 flex flex-col items-center z-20">
+          <div className="absolute top-40 md:top-48 lg:top-12 left-1/2 -translate-x-1/2 flex flex-col items-center z-20">
             <motion.span 
               key={activePlatform.reach}
               initial={{ opacity: 0, filter: 'blur(4px)', y: 5 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-4xl font-bold text-white tracking-tight"
+              className="text-3xl md:text-4xl font-bold text-white tracking-tight"
             >
               {activePlatform.reach}
             </motion.span>
-            <span className="text-xs text-white/50 uppercase tracking-widest font-medium mt-2">Total Reach</span>
+            <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest font-medium mt-1 md:mt-2">Total Reach</span>
           </div>
 
           {/* Radar SVG */}
-          <div className="absolute bottom-0 w-[80%] max-w-[1000px] aspect-[2/1] overflow-visible">
+          <div className="absolute bottom-0 w-[95%] md:w-[80%] max-w-[1000px] aspect-[2/1] overflow-visible">
             <svg viewBox="0 0 200 100" className="w-full h-full overflow-visible">
               <defs>
                 <linearGradient id="outerTicks" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -106,7 +106,7 @@ export default function DashboardOverview() {
             </svg>
 
             {/* Orbiting Platforms */}
-            <div className="absolute bottom-0 left-1/2 w-[70%] aspect-square -translate-x-1/2 translate-y-1/2 pointer-events-none z-20">
+            <div className="absolute bottom-0 left-1/2 w-[85%] md:w-[70%] aspect-square -translate-x-1/2 translate-y-1/2 pointer-events-none z-20">
               <motion.div 
                 className="absolute inset-0"
                 animate={{ rotate: activeIndex * 72 }}
@@ -128,9 +128,9 @@ export default function DashboardOverview() {
                             rotate: -(activeIndex * 72 - i * 72)
                           }}
                           transition={{ duration: 1.5, ease: "easeInOut" }}
-                          className={`flex flex-col items-center justify-center -ml-7 -mt-7 w-14 h-14 rounded-full bg-[#12121a] border ${isActive ? 'border-white/30 shadow-[0_0_30px_rgba(123,97,255,0.2)]' : 'border-white/10'} transition-all duration-500 pointer-events-auto`}
+                          className={`flex flex-col items-center justify-center -ml-5 -mt-5 md:-ml-7 md:-mt-7 w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#12121a] border ${isActive ? 'border-white/30 shadow-[0_0_30px_rgba(123,97,255,0.2)]' : 'border-white/10'} transition-all duration-500 pointer-events-auto`}
                         >
-                          <platform.icon className={`w-6 h-6 transition-colors duration-500 ${isActive ? 'text-white' : 'text-gray-500'}`} />
+                          <platform.icon className={`w-4 h-4 md:w-6 md:h-6 transition-colors duration-500 ${isActive ? 'text-white' : 'text-gray-500'}`} />
                         </motion.div>
                       </div>
                     </div>
@@ -141,18 +141,18 @@ export default function DashboardOverview() {
           </div>
 
           {/* Center Gauge (Dome) */}
-          <div className="absolute bottom-0 w-[35%] max-w-[450px] aspect-[2/1] rounded-t-full bg-gradient-to-t from-[#050505] to-primary/30 border-t border-primary/50 shadow-[0_-30px_60px_rgba(123,97,255,0.2)] flex items-end justify-center pb-8 z-30">
+          <div className="absolute bottom-0 w-[50%] md:w-[35%] max-w-[450px] aspect-[2/1] rounded-t-full bg-gradient-to-t from-[#050505] to-primary/30 border-t border-primary/50 shadow-[0_-30px_60px_rgba(123,97,255,0.2)] flex items-end justify-center pb-1 md:pb-1 lg:pb-8 z-30">
             <div className="flex flex-col items-center">
               <motion.span 
                 key={activePlatform.increase}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="text-4xl font-bold text-white leading-none"
+                className="text-lg md:text-lg lg:text-4xl font-bold text-white leading-none"
               >
                 {activePlatform.increase}
               </motion.span>
-              <span className="text-[10px] text-white/50 uppercase tracking-widest mt-2">Overall Increase</span>
+              <span className="text-[7px] md:text-[9px] text-white/50 uppercase tracking-widest mt-0.5 md:mt-0.5 lg:mt-2">Overall Increase</span>
             </div>
             
             {/* Animated Progress Arc Overlay */}
@@ -203,26 +203,26 @@ export default function DashboardOverview() {
         <div className="relative z-40 grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 h-full pointer-events-none">
           
           {/* Left Column - Glassmorphic Cards */}
-          <div className="lg:col-span-3 flex flex-col gap-6 pointer-events-auto items-start">
+          <div className="lg:col-span-3 flex flex-col gap-6 pointer-events-auto items-start pt-0 lg:pt-0">
             {/* Number of Posts Card */}
-            <div className="w-64 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-5 relative overflow-hidden shadow-2xl group hover:bg-white/10 transition-colors">
+            <div className="w-full max-w-[130px] sm:max-w-[180px] md:max-w-[220px] lg:w-64 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl md:rounded-3xl p-2.5 md:p-4 lg:p-5 relative overflow-hidden shadow-2xl group hover:bg-white/10 transition-colors">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-[50px] rounded-full -mr-10 -mt-10 pointer-events-none"></div>
-              <h3 className="text-sm font-medium text-white/70 mb-4">Number of Posts</h3>
-              <div className="flex items-baseline gap-2 mb-6">
+              <h3 className="text-[9px] md:text-sm font-medium text-white/70 mb-1.5 md:mb-4">Number of Posts</h3>
+              <div className="flex items-baseline gap-1.5 mb-1.5 md:mb-6">
                 <motion.span 
                   key={activePlatform.posts}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-5xl font-bold text-white tracking-tight"
+                  className="text-xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight"
                 >
                   {activePlatform.posts}
                 </motion.span>
-                <span className="text-sm text-white/50">Posts</span>
+                <span className="text-[9px] md:text-sm text-white/50">Posts</span>
               </div>
               
               {/* Animated Sparkline */}
-              <div className="h-16 w-full">
+              <div className="h-8 md:h-16 w-full">
                 <svg viewBox="0 0 100 40" className="w-full h-full overflow-visible">
                   <defs>
                     <linearGradient id="fadeLine" x1="0%" y1="0%" x2="100%" y2="0%">
